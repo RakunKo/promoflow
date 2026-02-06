@@ -1,0 +1,12 @@
+package io.promoflow.infrastructure.persistance.repository
+
+import io.promoflow.infrastructure.persistance.entity.promotion.Promotion
+import io.promoflow.infrastructure.persistance.repository.dsl.PromotionDslRepository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
+import java.util.UUID
+
+@Repository
+interface PromotionRepository: JpaRepository<Promotion, UUID>, PromotionDslRepository {
+    fun existsUserByName(name: String): Boolean
+}

@@ -1,9 +1,9 @@
 package io.promoflow.core.validator.validate
 
+import io.promoflow.core.common.utils.StringValidator.containsSpecialCharacter
 import io.promoflow.core.validator.annotations.NotSpecial
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
-import nexio.apiserver.application.common.utils.StringValidator.containsSpecialCharacter
 
 class NoSpecialValidator : ConstraintValidator<NotSpecial, String> {
     override fun isValid(

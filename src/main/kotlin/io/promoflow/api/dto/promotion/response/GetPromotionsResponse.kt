@@ -2,7 +2,7 @@ package io.promoflow.api.dto.promotion.response
 
 import io.promoflow.infrastructure.persistance.entity.promotion.Promotion
 import io.promoflow.infrastructure.persistance.entity.promotion.PromotionStatus
-import java.time.LocalDateTime
+import java.time.Instant
 import java.util.*
 
 data class GetPromotionsResponse(
@@ -12,11 +12,11 @@ data class GetPromotionsResponse(
         val id: UUID,
         val userId: UUID,
         val name: String,
-        val startTime: LocalDateTime,
-        val endTime: LocalDateTime,
+        val startTime: Instant,
+        val endTime: Instant,
         val status: PromotionStatus,
-        val createdAt: LocalDateTime,
-        val updatedAt: LocalDateTime,
+        val createdAt: Instant,
+        val updatedAt: Instant,
     ) {
         companion object {
             fun from(entity: Promotion): GetPromotionDetailResponse = GetPromotionDetailResponse(

@@ -3,19 +3,19 @@ package io.promoflow.api.dto.promotion.response
 import io.promoflow.infrastructure.persistance.entity.promotion.Promotion
 import io.promoflow.infrastructure.persistance.entity.promotion.PromotionRule
 import io.promoflow.infrastructure.persistance.entity.promotion.PromotionStatus
-import java.time.LocalDateTime
+import java.time.Instant
 import java.util.*
 
 data class GetPromotionResponse(
     val id: UUID,
     val userId: UUID,
     val name: String,
-    val startTime: LocalDateTime,
-    val endTime: LocalDateTime,
+    val startTime: Instant,
+    val endTime: Instant,
     val status: PromotionStatus,
     val rules: List<PromotionRuleResponse>,
-    val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime,
+    val createdAt: Instant,
+    val updatedAt: Instant,
 ) {
     data class PromotionRuleResponse(
         val id: UUID,

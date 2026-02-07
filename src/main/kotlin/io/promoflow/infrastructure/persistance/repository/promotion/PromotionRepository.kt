@@ -1,4 +1,4 @@
-package io.promoflow.infrastructure.persistance.repository
+package io.promoflow.infrastructure.persistance.repository.promotion
 
 import io.promoflow.infrastructure.persistance.entity.promotion.Promotion
 import io.promoflow.infrastructure.persistance.repository.dsl.PromotionDslRepository

@@ -19,6 +19,5 @@ data class CreatePromotionRuleRequest(
     val conditions: List<ConditionRequest> = emptyList(),
 
     @field:Valid
-    @field:NotNull(message = "Promotion effect must be defined")
-    val effect: EffectRequest
+    val effects: List<EffectRequest> = emptyList(),
 )

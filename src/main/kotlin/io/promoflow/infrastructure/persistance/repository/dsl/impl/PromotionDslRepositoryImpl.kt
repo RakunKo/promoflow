@@ -7,7 +7,7 @@ import io.promoflow.infrastructure.persistance.entity.promotion.QPromotion
 import io.promoflow.infrastructure.persistance.entity.user.QUser
 import io.promoflow.infrastructure.persistance.repository.dsl.CommonDsl
 import io.promoflow.infrastructure.persistance.repository.dsl.PromotionDslRepository
-import java.time.LocalDateTime
+import java.time.Instant
 
 
 class PromotionDslRepositoryImpl(
@@ -19,8 +19,8 @@ class PromotionDslRepositoryImpl(
 
     override fun searchPromotion(
         status: PromotionStatus?,
-        startTime: LocalDateTime?,
-        endTime: LocalDateTime?,
+        startTime: Instant?,
+        endTime: Instant?,
         page: Int,
         size: Int
     ): List<Promotion> {

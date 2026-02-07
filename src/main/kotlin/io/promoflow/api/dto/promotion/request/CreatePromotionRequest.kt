@@ -4,6 +4,7 @@ import io.promoflow.core.validator.annotations.NotSpecial
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
+import java.time.Instant
 import java.time.LocalDateTime
 
 data class CreatePromotionRequest(
@@ -13,8 +14,8 @@ data class CreatePromotionRequest(
     val name: String,
 
     @field:NotNull(message = "Start time is required")
-    val startTime: LocalDateTime,
+    val startTime: Instant,
 
     @field:NotNull(message = "End time is required")
-    val endTime: LocalDateTime,
+    val endTime: Instant,
 )

@@ -38,11 +38,6 @@ class JwtProvider(
         return NimbusJwtDecoder.withPublicKey(publicKey as RSAPublicKey).build()
     }
 
-    fun generateJwtTokenMono(
-        subject: String,
-        user: User,
-    ): JwtToken = generateJwtToken(subject, user)
-
     private fun generateToken(
         subject: String,
         user: User,

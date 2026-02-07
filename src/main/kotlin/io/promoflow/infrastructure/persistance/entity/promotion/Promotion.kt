@@ -4,7 +4,7 @@ import io.promoflow.api.dto.promotion.request.CreatePromotionRequest
 import io.promoflow.infrastructure.persistance.base.BaseEntity
 import io.promoflow.infrastructure.persistance.entity.user.User
 import jakarta.persistence.*
-import java.time.LocalDateTime
+import java.time.Instant
 
 @Entity
 @Table(name = "promotions")
@@ -13,10 +13,10 @@ class Promotion(
     var name: String,
 
     @Column(nullable = false)
-    var startTime: LocalDateTime,
+    var startTime: Instant,
 
     @Column(nullable = false)
-    var endTime: LocalDateTime,
+    var endTime: Instant,
 
     @Enumerated(value = EnumType.STRING)
     var status: PromotionStatus,
@@ -43,5 +43,21 @@ class Promotion(
                 user = user
             )
         }
+    }
+
+    fun updateName(newName: String): Promotion {
+        name = newName
+        return this
+    }
+
+    fun updateDate(newStartTime: Instant, newEndTime: Instant): Promotion {
+        startTime = newStartTime
+        endTime = newEndTime
+        return this
+    }
+
+    fun updateStatus(newStatus: PromotionStatus): Promotion {
+        status = newStatus
+        return this
     }
 }

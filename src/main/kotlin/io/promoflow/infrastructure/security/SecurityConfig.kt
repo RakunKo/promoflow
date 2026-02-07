@@ -19,6 +19,7 @@ import org.springframework.http.MediaType
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser
+import org.springframework.security.oauth2.core.user.OAuth2User
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +36,7 @@ class SecurityConfig(
                 "/swagger-ui/**",
                 "/v3/api-docs/**",
                 "/webjars/**",
+                "/api/v1/users/signup"
             )
     }
 
@@ -67,7 +69,7 @@ class SecurityConfig(
 
     private fun oauthSuccessHandler() = AuthenticationSuccessHandler { request, response, authentication ->
         val oauthToken = authentication as OAuth2AuthenticationToken
-        val user = oauthToken.principal as DefaultOidcUser
+        val user = oauthToken.principal as OAuth2User
         val subject = user.getAttribute<String>("sub") ?: user.name
 
         try {

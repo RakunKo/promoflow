@@ -9,6 +9,7 @@ import io.promoflow.api.dto.promotion.response.GetPromotionResponse
 import io.promoflow.api.dto.promotion.response.GetPromotionsResponse
 import io.promoflow.core.facade.PromotionFacade
 import io.promoflow.core.handler.handleApi
+import io.promoflow.infrastructure.persistance.entity.promotion.PromotionStatus
 import io.promoflow.infrastructure.persistance.entity.user.User
 import io.promoflow.infrastructure.security.annotations.AuthUser
 import jakarta.validation.Valid
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
@@ -61,33 +63,43 @@ class PromotionController(
     @PatchMapping("/{promotionId}/name")
     fun updatePromotionNameApi(
         @PathVariable promotionId: UUID,
-        @Valid @RequestBody body: UpdatePromotionNameRequest
+        @Valid @RequestBody body: UpdatePromotionNameRequest,
+        @AuthUser user: User
     ): ResponseEntity<PromotionIdResponse> =
         handleApi(
             status = HttpStatus.OK,
-            supplier = { e() },
+            supplier = { promotionFacade.modifyPromotionName(promotionId, body, user) },
         )
 
     @PatchMapping("/{promotionId}/date")
     fun updatePromotionDateApi(
         @PathVariable promotionId: UUID,
-        @Valid @RequestBody body: UpdatePromotionDateRequest
+        @Valid @RequestBody body: UpdatePromotionDateRequest,
+          @AuthUser user: User
     ): ResponseEntity<PromotionIdResponse> =
         handleApi(
             status = HttpStatus.OK,
-            supplier = { e() },
+            supplier = { promotionFacade.modifyPromotionDate(promotionId, body, user) },
         )
 
     @DeleteMapping("/{promotionId}")
     fun deletePromotionApi(
-        @PathVariable promotionId: UUID
+        @PathVariable promotionId: UUID,
+        @AuthUser user: User
     ): ResponseEntity<PromotionIdResponse> =
         handleApi(
             status = HttpStatus.NO_CONTENT,
-            supplier = { e() },
+            supplier = { promotionFacade.deletePromotion(promotionId, user) },
         )
 
-    fun e(): PromotionIdResponse {
-        return PromotionIdResponse(id = UUID.randomUUID())
-    }
+    @PatchMapping("/{promotionId}/status")
+    fun updatePromotionStatus(
+        @PathVariable promotionId: UUID,
+        @RequestParam status: PromotionStatus,
+        @AuthUser user: User
+    ): ResponseEntity<PromotionIdResponse> =
+        handleApi(
+            status = HttpStatus.OK,
+            supplier = { promotionFacade.modifyPromotionStatus(promotionId, status, user) },
+        )
 }

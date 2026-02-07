@@ -4,6 +4,7 @@ import io.promoflow.core.common.exception.ApiException
 import io.promoflow.core.common.status.UserErrorStatus
 import io.promoflow.api.dto.user.UpdateUsernameRequest
 import io.promoflow.api.dto.user.SignupUserRequest
+import io.promoflow.api.dto.user.UserIdResponse
 import io.promoflow.infrastructure.persistance.entity.user.User
 import io.promoflow.infrastructure.persistance.entity.user.UserStatus
 import io.promoflow.infrastructure.persistance.repository.UserRepository
@@ -15,7 +16,10 @@ import java.util.*
 class UserService(
     private val userRepository: UserRepository
 ) {
-    fun registerUser(body: SignupUserRequest): User = userRepository.save(body.toEntity())
+    fun registerUser(body: SignupUserRequest): UserIdResponse {
+        val user = userRepository.save(body.toEntity())
+        return UserIdResponse.form(user)
+    }
 
     fun modifyUsername(body: UpdateUsernameRequest, user: User) {
         if(user.name == body.name) throw ApiException(UserErrorStatus.NAME_IS_SAME, body.name)

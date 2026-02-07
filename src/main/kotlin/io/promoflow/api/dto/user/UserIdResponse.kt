@@ -6,7 +6,10 @@ import java.util.UUID
 data class UserIdResponse(
     val userId: UUID?
 ) {
-    fun form(entity: User): UserIdResponse = UserIdResponse(
-        userId = entity.id
-    )
+    companion object{
+        fun form(entity: User): UserIdResponse = UserIdResponse(
+            userId = entity.id
+        )
+    }
+
 }

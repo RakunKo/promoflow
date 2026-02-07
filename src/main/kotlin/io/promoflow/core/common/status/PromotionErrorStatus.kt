@@ -9,6 +9,8 @@ enum class PromotionErrorStatus(
 ) : BaseErrorCode {
     PROMOTION_IS_NOT_EXIST(HttpStatus.NOT_FOUND, "Promotion %s is not found"),
     PROMOTION_DATE_INVALID(HttpStatus.BAD_REQUEST, "Promotion start, end date is invalid"),
+    PROMOTION_CREATOR_NOT_SAME(HttpStatus.CONFLICT, "Promotion can be modified by creator"),
+    PROMOTION_STATUS_CONFLICT(HttpStatus.CONFLICT, "Promotion status cannot be modified in its current state."),
 
     ;
 

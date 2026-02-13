@@ -33,7 +33,7 @@ data class GetPromotionsResponse(
     }
 
     companion object {
-        fun from(entity: List<Promotion>) = GetPromotionsResponse (
+        fun of(entity: List<Promotion>) = GetPromotionsResponse (
             promotions = entity.map { GetPromotionDetailResponse.from(it) }.toList()
         )
     }

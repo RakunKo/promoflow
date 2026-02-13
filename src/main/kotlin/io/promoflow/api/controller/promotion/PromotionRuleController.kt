@@ -3,7 +3,9 @@ package io.promoflow.api.controller.promotion
 import io.promoflow.api.dto.promotion.request.CreatePromotionRuleRequest
 import io.promoflow.api.dto.promotion.request.UpdatePromotionNameRequest
 import io.promoflow.api.dto.promotion.request.UpdatePromotionRuleRequest
-import io.promoflow.api.dto.promotion.response.PromotionIdResponse
+import io.promoflow.api.dto.common.IdResponse
+import io.promoflow.api.dto.promotion.response.GetPromotionRulesResponse
+import io.promoflow.core.facade.PromotionRuleFacade
 import io.promoflow.core.handler.handleApi
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -19,58 +21,27 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 @RestController
-@RequestMapping("/api/v1/promotion-rules")
+@RequestMapping("/api/v1/promotions")
 class PromotionRuleController(
-
+    private val promotionRuleFacade: PromotionRuleFacade
 ) {
-    @PostMapping
+    @PostMapping("/{promotionId}/rules")
     fun createPromotionRuleApi(
         @Valid @RequestBody body: CreatePromotionRuleRequest,
-    ): ResponseEntity<PromotionIdResponse> =
+        @PathVariable promotionId: UUID,
+    ): ResponseEntity<IdResponse> =
         handleApi(
             status = HttpStatus.CREATED,
-            supplier = { e() },
+            supplier = { promotionRuleFacade.registerPromotionRule(body, promotionId) },
         )
 
-    @GetMapping("/{promotionRuleId}")
+    @GetMapping("/{promotionId}/rules")
     fun getPromotionRuleApi(
-        @PathVariable promotionRuleId: UUID
-    ): ResponseEntity<PromotionIdResponse> =
+        @PathVariable promotionId: UUID
+    ): ResponseEntity<GetPromotionRulesResponse> =
         handleApi(
             status = HttpStatus.OK,
-            supplier = { e() },
+            supplier = { promotionRuleFacade.getPromotionRules(promotionId) },
         )
 
-    @PatchMapping("/{promotionRuleId}/name")
-    fun updatePromotionRuleNameApi(
-        @PathVariable promotionRuleId: UUID,
-        @Valid @RequestBody body: UpdatePromotionNameRequest
-    ): ResponseEntity<PromotionIdResponse> =
-        handleApi(
-            status = HttpStatus.OK,
-            supplier = { e() },
-        )
-
-    @PatchMapping("/{promotionRuleId}/conditions")
-    fun updatePromotionRuleConditionApi(
-        @PathVariable promotionRuleId: UUID,
-        @Valid @RequestBody body: UpdatePromotionRuleRequest
-    ): ResponseEntity<PromotionIdResponse> =
-        handleApi(
-            status = HttpStatus.OK,
-            supplier = { e() },
-        )
-
-    @DeleteMapping("/{promotionRuleId}")
-    fun deletePromotionApi(
-        @PathVariable promotionRuleId: UUID
-    ): ResponseEntity<PromotionIdResponse> =
-        handleApi(
-            status = HttpStatus.NO_CONTENT,
-            supplier = { e() },
-        )
-
-    fun e(): PromotionIdResponse {
-        return PromotionIdResponse(id = UUID.randomUUID())
-    }
 }

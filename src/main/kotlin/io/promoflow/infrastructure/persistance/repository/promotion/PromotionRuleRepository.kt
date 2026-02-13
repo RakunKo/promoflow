@@ -8,4 +8,5 @@ import java.util.UUID
 
 @Repository
 interface PromotionRuleRepository: JpaRepository<PromotionRule, UUID>, PromotionRuleDslRepository {
+    fun findPromotionRulesByPromotionId(id: UUID): List<PromotionRule>
 }

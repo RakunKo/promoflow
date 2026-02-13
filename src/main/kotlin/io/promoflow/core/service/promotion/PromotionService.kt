@@ -49,7 +49,7 @@ class PromotionService(
     fun getPromotionById(
         id: UUID
     ): Promotion = promotionRepository.findById(id)
-        .orElseThrow { ApiException(PromotionErrorStatus.PROMOTION_IS_NOT_EXIST) }
+        .orElseThrow { ApiException(PromotionErrorStatus.PROMOTION_IS_NOT_EXIST, id) }
 
     fun updatePromotionName(
         promotion: Promotion,

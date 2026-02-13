@@ -2,6 +2,7 @@ package io.promoflow.infrastructure.security
 
 import io.promoflow.core.common.code.BaseErrorCode
 import io.promoflow.core.common.status.CommonErrorStatus
+import io.promoflow.core.common.utils.JsonUtils
 import io.promoflow.core.service.UserIdentifier
 import io.promoflow.core.service.UserService
 import io.promoflow.infrastructure.security.jwt.JwtProvider
@@ -12,13 +13,11 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.security.web.authentication.AuthenticationFailureHandler
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
-import nexio.apiserver.application.common.utils.JsonUtils
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser
 import org.springframework.security.oauth2.core.user.OAuth2User
 
 @Configuration

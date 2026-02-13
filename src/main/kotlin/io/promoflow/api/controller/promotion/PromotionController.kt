@@ -2,7 +2,7 @@ package io.promoflow.api.controller.promotion
 
 import io.promoflow.api.dto.promotion.params.PromotionParams
 import io.promoflow.api.dto.promotion.request.CreatePromotionRequest
-import io.promoflow.api.dto.promotion.response.PromotionIdResponse
+import io.promoflow.api.dto.common.IdResponse
 import io.promoflow.api.dto.promotion.request.UpdatePromotionDateRequest
 import io.promoflow.api.dto.promotion.request.UpdatePromotionNameRequest
 import io.promoflow.api.dto.promotion.response.GetPromotionResponse
@@ -36,7 +36,7 @@ class PromotionController(
     fun createPromotionApi(
         @Valid @RequestBody body: CreatePromotionRequest,
         @AuthUser user: User
-    ): ResponseEntity<PromotionIdResponse> =
+    ): ResponseEntity<IdResponse> =
         handleApi(
             status = HttpStatus.CREATED,
             supplier = { promotionFacade.registerPromotion(body, user) },
@@ -65,7 +65,7 @@ class PromotionController(
         @PathVariable promotionId: UUID,
         @Valid @RequestBody body: UpdatePromotionNameRequest,
         @AuthUser user: User
-    ): ResponseEntity<PromotionIdResponse> =
+    ): ResponseEntity<IdResponse> =
         handleApi(
             status = HttpStatus.OK,
             supplier = { promotionFacade.modifyPromotionName(promotionId, body, user) },
@@ -76,7 +76,7 @@ class PromotionController(
         @PathVariable promotionId: UUID,
         @Valid @RequestBody body: UpdatePromotionDateRequest,
           @AuthUser user: User
-    ): ResponseEntity<PromotionIdResponse> =
+    ): ResponseEntity<IdResponse> =
         handleApi(
             status = HttpStatus.OK,
             supplier = { promotionFacade.modifyPromotionDate(promotionId, body, user) },
@@ -86,7 +86,7 @@ class PromotionController(
     fun deletePromotionApi(
         @PathVariable promotionId: UUID,
         @AuthUser user: User
-    ): ResponseEntity<PromotionIdResponse> =
+    ): ResponseEntity<IdResponse> =
         handleApi(
             status = HttpStatus.NO_CONTENT,
             supplier = { promotionFacade.deletePromotion(promotionId, user) },
@@ -97,7 +97,7 @@ class PromotionController(
         @PathVariable promotionId: UUID,
         @RequestParam status: PromotionStatus,
         @AuthUser user: User
-    ): ResponseEntity<PromotionIdResponse> =
+    ): ResponseEntity<IdResponse> =
         handleApi(
             status = HttpStatus.OK,
             supplier = { promotionFacade.modifyPromotionStatus(promotionId, status, user) },

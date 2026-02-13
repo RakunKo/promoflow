@@ -23,7 +23,7 @@ data class GetPromotionResponse(
         val priority: Int
     ) {
         companion object {
-            fun from(entity: PromotionRule) = PromotionRuleResponse(
+            fun of(entity: PromotionRule) = PromotionRuleResponse(
                 id = entity.id,
                 name = entity.name,
                 priority = entity.priority
@@ -32,14 +32,14 @@ data class GetPromotionResponse(
     }
 
     companion object {
-        fun from(entity: Promotion) = GetPromotionResponse(
+        fun of(entity: Promotion) = GetPromotionResponse(
             id = entity.id,
             userId = entity.user.id,
             name = entity.name,
             startTime = entity.startTime,
             endTime = entity.endTime,
             status = entity.status,
-            rules = entity.rules.map { PromotionRuleResponse.from(it) }.toList(),
+            rules = entity.rules.map { PromotionRuleResponse.of(it) }.toList(),
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt
         )

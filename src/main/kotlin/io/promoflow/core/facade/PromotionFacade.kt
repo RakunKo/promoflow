@@ -6,7 +6,7 @@ import io.promoflow.api.dto.promotion.request.UpdatePromotionDateRequest
 import io.promoflow.api.dto.promotion.request.UpdatePromotionNameRequest
 import io.promoflow.api.dto.promotion.response.GetPromotionResponse
 import io.promoflow.api.dto.promotion.response.GetPromotionsResponse
-import io.promoflow.api.dto.promotion.response.PromotionIdResponse
+import io.promoflow.api.dto.common.IdResponse
 import io.promoflow.core.service.promotion.PromotionConditionService
 import io.promoflow.core.service.promotion.PromotionEffectService
 import io.promoflow.core.service.promotion.PromotionRuleService
@@ -25,22 +25,22 @@ class PromotionFacade(
     private val promotionEffectService: PromotionEffectService,
 ) {
     @Transactional
-    fun registerPromotion(request: CreatePromotionRequest, user: User): PromotionIdResponse {
+    fun registerPromotion(request: CreatePromotionRequest, user: User): IdResponse {
         val promotion = promotionService.createPromotion(request, user)
 
-        return PromotionIdResponse.form(promotion)
+        return IdResponse.of(promotion.id)
     }
 
     fun getPromotions(params: PromotionParams): GetPromotionsResponse {
         val promotions = promotionService.getPromotions(params)
 
-        return GetPromotionsResponse.from(promotions)
+        return GetPromotionsResponse.of(promotions)
     }
 
     fun getPromotionDetail(id: UUID): GetPromotionResponse {
         val promotion = promotionService.getPromotionById(id)
 
-        return GetPromotionResponse.from(promotion)
+        return GetPromotionResponse.of(promotion)
     }
 
     @Transactional
@@ -48,14 +48,14 @@ class PromotionFacade(
         id: UUID,
         request: UpdatePromotionNameRequest,
         user: User
-    ): PromotionIdResponse {
+    ): IdResponse {
         val promotion = promotionService.updatePromotionName(
             promotionService.getPromotionById(id),
             request,
             user
         )
 
-        return PromotionIdResponse.form(promotion)
+        return IdResponse.of(promotion.id)
     }
 
     @Transactional
@@ -63,21 +63,21 @@ class PromotionFacade(
         id: UUID,
         request: UpdatePromotionDateRequest,
         user: User
-    ): PromotionIdResponse {
+    ): IdResponse {
         val promotion = promotionService.updatePromotionDate(
             promotionService.getPromotionById(id),
             request,
             user
         )
 
-        return PromotionIdResponse.form(promotion)
+        return IdResponse.of(promotion.id)
     }
 
     @Transactional
     fun deletePromotion(
         id: UUID,
         user: User
-    ): PromotionIdResponse {
+    ): IdResponse {
         val promotion = promotionService.getPromotionById(id)
         val rules = promotion.rules
 
@@ -91,7 +91,7 @@ class PromotionFacade(
 
         val deletedPromotion = promotionService.deletePromotion(promotion, user)
 
-        return PromotionIdResponse.form(deletedPromotion)
+        return IdResponse.of(deletedPromotion.id)
     }
 
     @Transactional
@@ -99,13 +99,13 @@ class PromotionFacade(
         id: UUID,
         status: PromotionStatus,
         user: User
-    ): PromotionIdResponse {
+    ): IdResponse {
         val promotion = promotionService.updatePromotionStatus(
             promotionService.getPromotionById(id),
             status,
             user
         )
 
-        return PromotionIdResponse.form(promotion)
+        return IdResponse.of(promotion.id)
     }
 }

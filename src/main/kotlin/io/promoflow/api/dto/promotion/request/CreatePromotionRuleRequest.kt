@@ -1,7 +1,7 @@
 package io.promoflow.api.dto.promotion.request
 
-import io.promoflow.api.dto.promotion.sub.ConditionRequest
-import io.promoflow.api.dto.promotion.sub.EffectRequest
+import io.promoflow.api.dto.promotion.sub.ConditionDto
+import io.promoflow.api.dto.promotion.sub.EffectDto
 import io.promoflow.core.validator.annotations.NotSpecial
 import jakarta.validation.Valid
 import jakarta.validation.constraints.*
@@ -16,8 +16,8 @@ data class CreatePromotionRuleRequest(
     val priority: Int,
 
     @field:Valid
-    val conditions: List<ConditionRequest> = emptyList(),
+    val conditions: List<ConditionDto> = emptyList(),
 
     @field:Valid
-    val effects: List<EffectRequest> = emptyList(),
+    val effects: List<EffectDto> = emptyList(),
 )

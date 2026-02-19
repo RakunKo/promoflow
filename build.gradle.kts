@@ -8,7 +8,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.3"
 }
 
-group = "io.promoflow"
+group = "io.eatda"
 version = "1.0-SNAPSHOT"
 
 repositories {

@@ -11,3 +11,8 @@ class UnauthorizedException(
     errorCode: BaseErrorCode,
     vararg args: Any,
 ) : BaseException(errorCode, *args)
+
+class InfraException(
+    errorCode: BaseErrorCode,
+    vararg args: Any,
+) : BaseException(errorCode, *args)

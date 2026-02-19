@@ -30,6 +30,10 @@ class ExceptionHandler {
     fun handleApiException(ex: ApiException): ResponseEntity<ErrorResponse> =
         ResponseEntity.status(ex.status).body(ex.toResponse())
 
+    @ExceptionHandler(InfraException::class)
+    fun handleInfraException(ex: InfraException): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(ex.status).body(ex.toResponse())
+
     @ExceptionHandler(ConstraintViolationException::class)
     fun handleConstraintViolation(ex: ConstraintViolationException): ResponseEntity<ErrorResponse> {
         val messages = ex.constraintViolations.joinToString(", ") { violation ->

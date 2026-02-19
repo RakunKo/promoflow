@@ -12,4 +12,6 @@ enum class CommonErrorStatus(
     FORBIDDEN_ROLE(HttpStatus.FORBIDDEN, "Role is insufficient permissions"),
     PATH_PARAMS_INVALID(HttpStatus.BAD_REQUEST, "Invalid value %s for path parameters %s"),
     PATH_PARAMS_TYPE_INVALID(HttpStatus.BAD_REQUEST, "Invalid value type for path parameters %s"),
+
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred. Please try later.")
 }

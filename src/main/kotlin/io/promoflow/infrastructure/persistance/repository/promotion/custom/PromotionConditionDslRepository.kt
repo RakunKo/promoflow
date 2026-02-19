@@ -1,4 +1,4 @@
-package io.promoflow.infrastructure.persistance.repository.dsl
+package io.promoflow.infrastructure.persistance.repository.promotion.custom
 
 import io.promoflow.infrastructure.persistance.entity.promotion.Promotion
 import io.promoflow.infrastructure.persistance.entity.promotion.PromotionRule
@@ -6,8 +6,8 @@ import io.promoflow.infrastructure.persistance.entity.promotion.PromotionStatus
 import java.time.LocalDateTime
 import java.util.*
 
-interface PromotionRuleDslRepository {
-    fun deletePromotionRules(
-        promotionRuleIds: List<UUID>
+interface PromotionConditionDslRepository {
+    fun deletePromotionConditions(
+        promotionConditionIds: List<UUID>
     ): Long
 }

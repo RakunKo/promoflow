@@ -1,13 +1,14 @@
-package io.promoflow.infrastructure.persistance.repository.dsl.impl
+package io.promoflow.infrastructure.persistance.repository.promotion.custom
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import io.promoflow.infrastructure.persistance.entity.promotion.effect.QPromotionEffect
 import io.promoflow.infrastructure.persistance.repository.dsl.CommonDsl
-import io.promoflow.infrastructure.persistance.repository.dsl.PromotionEffectDslRepository
+import io.promoflow.infrastructure.persistance.repository.promotion.custom.PromotionEffectDslRepository
+import org.springframework.stereotype.Repository
 import java.time.Instant
 import java.util.UUID
 
-
+@Repository
 class PromotionEffectDslRepositoryImpl(
     private val queryFactory: JPAQueryFactory,
 ): PromotionEffectDslRepository, CommonDsl() {
